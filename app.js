@@ -1,19 +1,23 @@
 const express=require("express");
 const bodyParser=require("body-parser");
 
+
 const app=express();
 
+app.set("view engine","ejs");
 
 app.get("/",(req,res)=>{
-
+	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	var today=new Date();
+	
+	var day=today.toLocaleDateString("en-US", options)
+ 
+	res.render("list",{kindOfDay:day})
 
-	if(today.getDay()===3||today.getDay()===0){
-		res.send("weekends")
-	}else{
-		res.send("oops")
-	}
+})
 
+app.post("/",function(res,req){
+	
 })
 
 
