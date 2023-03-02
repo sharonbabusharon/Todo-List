@@ -1,8 +1,10 @@
 const express=require("express");
 const bodyParser=require("body-parser");
 
+var items=["Buy Food","Drink Water","Excersice"];
 
 const app=express();
+app.use(bodyParser.urlencoded({extended:true}))
 
 app.set("view engine","ejs");
 
@@ -12,13 +14,22 @@ app.get("/",(req,res)=>{
 	
 	var day=today.toLocaleDateString("en-US", options)
  
-	res.render("list",{kindOfDay:day})
+	res.render("list",{kindOfDay:day,newOption:items})
 
+
+	app.post("/",function(req,res){
+		var item=req.body.newItem;
+		items.push(item)
+		
+		
+			res.redirect("/")
+
+		
+		
+	})
 })
 
-app.post("/",function(res,req){
-	
-})
+
 
 
 app.listen(3000,()=>{
