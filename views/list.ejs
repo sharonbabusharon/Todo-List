@@ -4,24 +4,30 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/styles.css">
 	<title>Document</title>
 </head>
 <body>
+<div class="box" id="heading">
+	<h1><%= kindOfDay %></h1> 
+</div>
 
-	<h1><%= kindOfDay %></h1>
-	<ul>
-		
-		<% for (let i = 0; i <newOption.length; i++)
-		 
-		 {%> <li><%= newOption[i] %></li> 
-			
-		<%}%>
+<div class="box">
+	<% for (let i = 0; i <newOption.length; i++) {%>
+	<div class="item">
+		<input type="checkbox">
+		 <p><%= newOption[i] %></p > 
+		</div>
+	<%}%>
+
+	<form action="/" method="post" class="item">
+		<input type="text" name="newItem" placeholder="New Item" autocomplete="off" >
+		<button type="submit" name="button" >+</button>
+	</form>
+
+</div>
 
 		
-		<form action="/" method="post">
-			<input type="text" name="newItem" >
-			<button type="submit" name="button">Click to Add</button>
-		</form>
-	</ul>
+		
 </body>
 </html>
