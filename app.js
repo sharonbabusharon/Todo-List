@@ -1,8 +1,9 @@
 const express=require("express");
 const bodyParser=require("body-parser");
+const Date=require(__dirname +"/date.js")
 
-var items=["Buy Food","Drink Water","Excersice"];
-var workItems=[];
+let items=["Buy Food","Drink Water","Excersice"];
+let workItems=[];
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}))
@@ -12,10 +13,7 @@ app.set("view engine","ejs");
 
 app.get("/",(req,res)=>{
 	
-	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-	var today=new Date();
-	
-	var day=today.toLocaleDateString("en-US", options)
+	let day=Date.getDate()
  
 	res.render("list",{listTitle:day,newOption:items})
 
@@ -23,7 +21,7 @@ app.get("/",(req,res)=>{
 
 	app.post("/",function(req,res){
 		
-		var item=req.body.newItem;
+		let item=req.body.newItem;
 		
 		if(req.body.list=="work"){
 			workItems.push(item);
@@ -43,8 +41,12 @@ app.get("/work",(req,res)=>{
 	res.render("list",{listTitle:"work",newOption:workItems})
 })
 
+app.get("/about",(req,res)=>{
+	res.render("about");
+})
+
 // app.post("/work",(req,res)=>{
-// 	var item=req.body.mewItem;
+// 	let item=req.body.mewItem;
 // 	workItems.push(item)
 // 	res.redirect("/work")
 // })
